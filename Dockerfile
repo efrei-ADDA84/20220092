@@ -1,4 +1,4 @@
-# For more information, please refer to https://aka.ms/vscode-docker-python
+# Use base python image
 FROM python:3.10-slim
 
 # Install pip requirements
