@@ -1,23 +1,16 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
-FROM python:3.10-slim
-
-# Keeps Python from generating .pyc files in the container
-ENV PYTHONDONTWRITEBYTECODE=1
-
-# Turns off buffering for easier container logging
-ENV PYTHONUNBUFFERED=1
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.10
 
 # Install pip requirements
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
 
+# Create a workdir and copy files to it
 WORKDIR /app
 COPY . /app
 
-# Creates a non-root user with an explicit UID and adds permission to access the /app folder
-# For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
-RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
-USER appuser
+# Expose port
+EXPOSE 8081
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD ["python", "weather.py"]
+CMD ["uvicorn", "weather:app", "--host", "localhost", "--port", "8081"]
