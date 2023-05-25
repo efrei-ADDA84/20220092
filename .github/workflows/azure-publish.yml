@@ -42,5 +42,5 @@ jobs:
         name: 20220092
         location: 'france central'
         environment-variables: API_KEY=${{ secrets.OPENWEATHER_API_KEY }}
-        port: 8081
+        ports: 8081
 
