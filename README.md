@@ -30,6 +30,8 @@ You can also request the API directly in your browser, using the same URL as abo
 
 I have created a workflow that automatically builds and pushes an image to the Azure Container Registry every time something is pushed on GitHub. In order to keep my Docker login data private, I used GitHub Action's secrets.
 
+Using a workflow instead of the Azure CLI makes everything automated, making it easier for the developer to just push their code without having any extra steps.
+
 ```yml
 name: Azure Publish
 
