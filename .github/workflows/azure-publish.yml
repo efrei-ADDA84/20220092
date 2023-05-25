@@ -30,12 +30,15 @@ jobs:
         docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/20220092:latest .
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/20220092:latest
 
-    - name: Deploy to Azure Container Instances
-      uses: azure/aci-deploy@v1
+    - name: 'Deploy to Azure Container Instances'
+      uses: 'azure/aci-deploy@v1'
       with:
-        azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
-        resource_group: ${{ secrets.RESOURCE_GROUP }}
-        dns_name_label: devops-20220092
-        location: francecentral
+        resource-group: ${{ secrets.RESOURCE_GROUP }}
+        dns-name-label: ${{ secrets.RESOURCE_GROUP }}
         image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/20220092:latest
-        container_name: 20220092
+        registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        registry-username: ${{ secrets.REGISTRY_USERNAME }}
+        registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+        name: 20220092
+        location: 'france central'
+
